@@ -9,10 +9,18 @@
   <h1>Angular</h1>
   
   <div ng-app="drinkApp">
+
     <div ng-controller="AppCtrl">
+      
+      Ctrl
       <input type="text" ng-model="ctrlFlavor">
-      <div drink flavor="{{ctrlFlavor}}"></div>
+      
+      <br/>
+      Dir
+      <div drink flavor="ctrlFlavor"></div> <!-- put property on the scope to bind to -->
+
     </div>
+
   </div>
 
 

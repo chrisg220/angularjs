@@ -8,8 +8,8 @@ app.controller('AppCtrl', function($scope) {
 app.directive('drink', function() {
 	return {
 		scope: {
-			flavor: '@'
+			flavor: '='		// Not expecting a string like '@'. Expecting an object. 'This' is set to 'that'.
 		},
-		template: '<div>{{flavor}}</div>'
+		template: '<input type="text" ng-model="flavor">'
 	};
 });
