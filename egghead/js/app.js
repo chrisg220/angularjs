@@ -1,20 +1,15 @@
 // Define an App
-var app = angular.module('choreApp', []);
+var app = angular.module('drinkApp', []);
 
-app.controller('ChoreCtrl', function($scope) {
-	$scope.logChore = function(chore) {
-		alert(chore + " is done!");
-	};
+app.controller('AppCtrl', function($scope) {
+	$scope.ctrlFlavor = 'blackberry';
 });
 
-app.directive('kid', function() {
+app.directive('drink', function() {
 	return {
-		restrict: 'E',
-		scope: {  // Pass in an object to limit the scope to the individual kid
-			done:'&'  // '&' expression. Binds 'done' to 'logChore(chore)' as set in the HTML. Now when 'done()' is called, it will call 'logChore()'
+		scope: {
+			flavor: '@'
 		},
-		template: '<input type="text" ng-model="choreModel">' +
-			' {{chore}}' +
-			' <div class="button" ng-click="done({chore:choreModel})">I am done</div>' // {{property:value}}
+		template: '<div>{{flavor}}</div>'
 	};
 });
