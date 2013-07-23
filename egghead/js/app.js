@@ -1,18 +1,20 @@
 // Define an App
-var app = angular.module('behaviorApp', []);
+var app = angular.module('twitterApp', []);
 
-app.directive('enter', function() {		// can place 'enter' within an HTML element
-  return function(scope, element, attrs) {
-    element.bind('mouseenter', function() {
-      element.addClass(attrs.enter);	// '.addClass' is part of the jqueryLite version. 'attrs.enter' looks at the 'enter' attribute in the element
-    });
-  };
+app.controller('AppCtrl', function($scope) {
+	$scope.loadMoreTweets = function() {
+		alert('Loading More Tweets');
+	};
+
+	$scope.deleteTweets = function() {
+		alert('deleting tweets');
+	};
 });
 
-app.directive('leave', function() {		// can place 'leave' within an HTML element
-  return function(scope, element, attrs) {
-    element.bind('mouseleave', function() {
-      element.removeClass(attrs.enter);
-    });
-  };
+app.directive('enter', function() {
+	return function(scope, element, attrs) {
+		element.bind('mouseenter', function() {
+			scope.$apply(attrs.enter);
+		});
+	};
 });

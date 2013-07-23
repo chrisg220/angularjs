@@ -8,8 +8,10 @@
 <body>
   <h1>Angular</h1>
   
-  <div ng-app="behaviorApp">
-    <div enter="panel" leave> I'm Content! </div>
+  <div ng-app="twitterApp">
+    <div ng-controller="AppCtrl">
+      <div enter="deleteTweets()"> Roll over to load more tweets </div>
+    </div>
   </div>
 
 
