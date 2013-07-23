@@ -2,17 +2,17 @@
 var app = angular.module('behaviorApp', []);
 
 app.directive('enter', function() {		// can place 'enter' within an HTML element
-  return function(scope, element) {
+  return function(scope, element, attrs) {
     element.bind('mouseenter', function() {
-      console.log('I am inside of you!');
+      element.addClass(attrs.enter);	// '.addClass' is part of the jqueryLite version. 'attrs.enter' looks at the 'enter' attribute in the element
     });
   };
 });
 
 app.directive('leave', function() {		// can place 'leave' within an HTML element
-  return function(scope, element) {
+  return function(scope, element, attrs) {
     element.bind('mouseleave', function() {
-      console.log('I am leaving on a jet plane');
+      element.removeClass(attrs.enter);
     });
   };
 });
