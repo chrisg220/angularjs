@@ -11,15 +11,11 @@
   <div ng-app="myApp">
     
     <div ng-controller="AvengersCtrl">
-      <!-- (1) <input type="text" ng-model="searchText"> -->
-      <!-- <input type="text" ng-model="search.name"> --><!-- Search only the 'name' property in the model -->
-      <!-- <input type="text" ng-model="search.character"> --> <!-- Search only the 'character' property in the model -->
-      <input type="text" ng-model="search.$"> <!-- '$' will display either -->
+      <input type="text" ng-model="search.$"> 
       <table>
-        <!-- (1) <tr ng-repeat="actor in avengers.cast | filter:searchText">-->
-        <tr ng-repeat="actor in avengers.cast | filter:search"> <!-- filter by the 'search' object -->
-          <td>{{actor.name}}</td>
-          <td>{{actor.character}}</td>
+        <tr ng-repeat="actor in avengers.cast | orderBy: 'name' | limitTo:-3 | filter:search "> <!-- can insert '-' in front of 'name' for reverse order -->
+          <td>{{ actor.name | lowercase }}</td>
+          <td>{{ actor.character | uppercase }}</td>
         </tr>
       </table>
     </div>
