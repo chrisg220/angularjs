@@ -8,54 +8,24 @@
 <body>
   <h1>Angular</h1>
   
-  <div ng-app="myApp">
-    
-    <div ng-controller="AvengersCtrl">
-      <input type="text" ng-model="search.$"> 
-      <table>
-        <tr ng-repeat="actor in avengers.cast | orderBy: 'name' | limitTo:-3 | filter:search "> <!-- can insert '-' in front of 'name' for reverse order -->
-          <td>{{ actor.name | lowercase }}</td>
-          <td>{{ actor.character | uppercase }}</td>
-        </tr>
-      </table>
-    </div>
-
+  <div ng-app="superhero">
+      <superman></superman>
   </div>
-
+  
 
   <script src="js/angular.js"></script>
   <script type="text/javascript">
+
     // Define an App
-    var myApp = angular.module('myApp', []);  
-    // Create factory to create a service.
-    myApp.factory('Avengers', function() {
-      var Avengers = {};
-
-      Avengers.cast = [
-        {
-          name: 'Robert Downey Jr.',
-          character: 'Iron Man'
-        },
-        {
-          name: 'Samuel L. Jackson',
-          character: 'Nick Fury'
-        },
-        {
-          name: 'Gwyneth Paltrow',
-          character: 'Pepper Potts'
-        },
-        {
-          name: 'Alexis Denisof',
-          character: 'The Other'
-        }
-      ];
-
-      return Avengers;
-    });
-
-    function AvengersCtrl($scope, Avengers) {
-      $scope.avengers = Avengers;
-    }
+    var app = angular.module('superhero', []);  
+    
+    // Create a directive
+    app.directive('superman', function() {
+      return {
+        restrict: "E",
+        template: "<div>Here I am to save the day</div>"
+      }
+    })
 
   </script>
 
