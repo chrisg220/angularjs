@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Angular</title>
+  
+</head>
+<body>
+  <h1>Angular</h1>
+  
+  <div ng-app="myApp">
+    
+    <div ng-controller="FirstCtrl">
+      <input type="text" ng-model="data.message">
+      <h1>{{data.message}}</h1>
+    </div>
+
+    <div ng-controller="SecondCtrl">
+      <input type="text" ng-model="data.message">
+      <h1>{{reversedMessage()}}</h1>
+    </div>
+
+  </div>
+
+  <script src="js/angular.js"></script>
+
+  <script type="text/javascript">
+    // Define an App
+    var myApp = angular.module('myApp', []);  
+    // Create factory to create a service.
+    myApp.factory('Data', function() {
+      return { message: 'I am data from a service' }
+    });
+
+    function FirstCtrl($scope, Data) {
+      $scope.data = Data;
+    }
+
+    function SecondCtrl($scope, Data) {
+      $scope.data = Data;
+      
+      $scope.reversedMessage = function() {
+        // return $scope.data.message.split("").reverse().join("");
+        return message.split("").reverse().join("");
+      }
+    } 
+
+  </script>
+</body>
+</html>
