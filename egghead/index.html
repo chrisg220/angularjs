@@ -8,39 +8,13 @@
 <body>
   <h1>Angular</h1>
   
-  <div ng-app="superhero">
-    <!-- directive:superman --> <!-- use with 'M' -->
-    <div superman flash ></div>
+  <div ng-app="behaviorApp">
+    <div enter leave> I'm Content! </div>
   </div>
 
 
   <script src="js/angular.js"></script>
-  <script type="text/javascript">
-
-    // Define an App
-    var app = angular.module('superhero', []);  
-    
-    // Create a directive
-    app.directive('superman', function() {
-      return {
-        restrict: 'A', // 'A' is for attribute. 'C' is for 'class'. 'E' is for 'element'. 'M' is for 'comment'.
-        link: function() {
-          alert('I am working faster stronger. ');
-        }
-      }
-    })
-
-    app.directive('flash', function() {
-      return {
-        restrict: 'A', // 'A' is for attribute. 'C' is for 'class'. 'E' is for 'element'. 'M' is for 'comment'.
-        link: function() {
-          alert('I am working faster.');
-        }
-      }
-    })
-
-
-  </script>
+  <script src="js/app.js"></script>
 
 
 </body>
