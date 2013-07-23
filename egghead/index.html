@@ -10,66 +10,59 @@
   
   <div ng-app="myApp">
     
-    <div ng-controller="FirstCtrl">
-      <input type="text" ng-model="data.message">
-      <h1>{{data.message}}</h1>
-    </div>
-
-    <div ng-controller="SecondCtrl">
-      <input type="text" ng-model="data.message">
-      <h1>{{data.message|reverse}}</h1> 
+    <div ng-controller="AvengersCtrl">
+      <!-- (1) <input type="text" ng-model="searchText"> -->
+      <!-- <input type="text" ng-model="search.name"> --><!-- Search only the 'name' property in the model -->
+      <!-- <input type="text" ng-model="search.character"> --> <!-- Search only the 'character' property in the model -->
+      <input type="text" ng-model="search.$"> <!-- '$' will display either -->
+      <table>
+        <!-- (1) <tr ng-repeat="actor in avengers.cast | filter:searchText">-->
+        <tr ng-repeat="actor in avengers.cast | filter:search"> <!-- filter by the 'search' object -->
+          <td>{{actor.name}}</td>
+          <td>{{actor.character}}</td>
+        </tr>
+      </table>
     </div>
 
   </div>
 
 
-
-
-
-
-
-
   <script src="js/angular.js"></script>
-
   <script type="text/javascript">
     // Define an App
     var myApp = angular.module('myApp', []);  
     // Create factory to create a service.
-    myApp.factory('Data', function() {
-      return { message: 'I am data from a service' }
+    myApp.factory('Avengers', function() {
+      var Avengers = {};
+
+      Avengers.cast = [
+        {
+          name: 'Robert Downey Jr.',
+          character: 'Iron Man'
+        },
+        {
+          name: 'Samuel L. Jackson',
+          character: 'Nick Fury'
+        },
+        {
+          name: 'Gwyneth Paltrow',
+          character: 'Pepper Potts'
+        },
+        {
+          name: 'Alexis Denisof',
+          character: 'The Other'
+        }
+      ];
+
+      return Avengers;
     });
 
-    myApp.filter('reverse', function(Data) {
-      return function(text) {
-        return text.split('').reverse().join('') + Data.message;
-      }
-    })
-
-    // Controllers
-    function FirstCtrl($scope, Data) {
-      $scope.data = Data;
+    function AvengersCtrl($scope, Avengers) {
+      $scope.avengers = Avengers;
     }
 
-    function SecondCtrl($scope, Data) {
-      $scope.data = Data;
-      
-      $scope.reversedMessage = function() {
-        return message.split("").reverse().join("");
-      }
-    } 
-
-    // Sample test
-    describe('filter', function() {
-      beforeEach(module('myApp'));
-
-      describe('reverse', function() {
-        it('should reverse a string', inject(function(reverseFilter) {
-          expect(reverseFilter('ABCD')).toEqual('DCBA');
-          expect(reverseFilter('John')).toEqual('nhoJ');
-        }))
-      })
-    });
-
   </script>
+
+
 </body>
 </html>
