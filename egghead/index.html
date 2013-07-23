@@ -17,10 +17,17 @@
 
     <div ng-controller="SecondCtrl">
       <input type="text" ng-model="data.message">
-      <h1>{{reversedMessage()}}</h1>
+      <h1>{{data.message|reverse}}</h1> 
     </div>
 
   </div>
+
+
+
+
+
+
+
 
   <script src="js/angular.js"></script>
 
@@ -32,6 +39,12 @@
       return { message: 'I am data from a service' }
     });
 
+    myApp.filter('reverse', function(Data) {
+      return function(text) {
+        return text.split('').reverse().join('') + Data.message;
+      }
+    });
+
     function FirstCtrl($scope, Data) {
       $scope.data = Data;
     }
@@ -40,7 +53,6 @@
       $scope.data = Data;
       
       $scope.reversedMessage = function() {
-        // return $scope.data.message.split("").reverse().join("");
         return message.split("").reverse().join("");
       }
     } 
