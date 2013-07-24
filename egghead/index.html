@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <title>Angular</title>
   
+  <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
   <h1>Angular</h1>
@@ -12,9 +14,10 @@
 
     <div ng-controller="AppCtrl">
       
-      <phone number="555-1234" network="network" make-call="leaveVoicemail(number, message)"></phone>
-      <phone number="867-5309" network="network" make-call="leaveVoicemail(number, message)"></phone>
-      <phone number="911" network="network" make-call="leaveVoicemail(number, message)"></phone>
+      <panel>
+        <div class="button"> Click me! </div>
+        <div class="button"> Other DOM element to be transcluded </div>
+      </panel>
 
     </div>
 
