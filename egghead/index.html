@@ -10,13 +10,15 @@
 <body>
   <h1>Angular</h1>
   
-  <div ng-app="phoneApp">
+  <div ng-app="app">
+    
+    <input type="text" ng-model="model.chrisProp"> <br/>
+    <input type="text" ng-model="model.title"> <br/>
+    <input type="text" ng-model="model.content">
 
-    <div ng-controller="AppCtrl">
-      
-      <div class="button" ng-click="AppCtrl.sayHi()"> Click Me! </div>  <!-- More declarative approach. More clear where method is being invoked. This is personal preference for some -->
-
-    </div>
+    <zippy attrfoo="{{model.chrisProp}}" attrbar="{{model.title}}">     <!-- grabs data from chrisProp -->
+      This is the {{model.content}} and the title is {{model.title}}
+    </zippy>
 
   </div>
 
