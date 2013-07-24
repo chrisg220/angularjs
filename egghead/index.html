@@ -12,7 +12,9 @@
 
     <div ng-controller="AppCtrl">
       
-      <div phone dial="callHome(message)"></div>
+      <phone number="555-1234" network="network" make-call="leaveVoicemail(number, message)"></phone>
+      <phone number="867-5309" network="network" make-call="leaveVoicemail(number, message)"></phone>
+      <phone number="911" network="network" make-call="leaveVoicemail(number, message)"></phone>
 
     </div>
 
