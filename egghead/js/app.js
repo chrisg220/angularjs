@@ -11,7 +11,7 @@ app.directive('zippy', function() {
 		},
 		template: '<div>' +
 				  '<h3 ng-click="toggleContent()" > first row is: {{attrfoo}} second row is: {{attrbar}} </h3>' +
-				  '<div ng-click="myFunc()" ng-show="isContentVisible" ng-transclude> </div>' +
+				  '<div ng-click="myFunc()" ng-show="isContentVisible" ng-transclude> </div>' +  // content is transcluded in before the closing '</div>' tag
 				  '</div>',
 
 		link: function(scope) {
@@ -23,7 +23,7 @@ app.directive('zippy', function() {
 			};
 
 			scope.myFunc = function() {
-				console.log('myfunct Fired')
+				console.log('myfunct Fired');
 			};
 		}
 	};
