@@ -1,30 +1,31 @@
 // Define an App
 var app = angular.module('app', []);
 
-app.directive('zippy', function() {
-	return {
-		restrict: 'E',
-		transclude: true,
-		scope: {
-			attrfoo: '@',
-			attrbar: '@'
-		},
-		template: '<div>' +
-				  '<h3 ng-click="toggleContent()" > first row is: {{attrfoo}} second row is: {{attrbar}} </h3>' +
-				  '<div ng-click="myFunc()" ng-show="isContentVisible" ng-transclude> </div>' +  // content is transcluded in before the closing '</div>' tag
-				  '</div>',
+app.config(function($routeProvider) {
+	$routeProvider
+		.when('/', 
+		{
+			templateURL: 'app.html', 
+			controller: 'AppCtrl'
+		})
+		.when('/pizza/:crust/:toppings', {
+			redirectTo: function(routeParams, path, search) {
+				console.log(routeParams);
+				console.log(path);
+				console.log(search);
+				return '/' + routeParams.crust;
+			}
+		})
+		.when('/deep', {
+			template: 'Deep Dish'
+		})
+		.otherwise({
+			redirectTo: '/'
+		});
+});
 
-		link: function(scope) {
-			scope.isContentVisible = false;
-
-			scope.toggleContent = function() {
-				scope.isContentVisible = !scope.isContentVisible;
-				console.log('toggleContent Fired');
-			};
-
-			scope.myFunc = function() {
-				console.log('myfunct Fired');
-			};
-		}
+app.controller('AppCtrl', function($scope) {
+	$scope.model = {
+		message: 'This is my app!!!'
 	};
 });

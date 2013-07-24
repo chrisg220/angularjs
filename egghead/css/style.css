@@ -1,3 +1,5 @@
 .button { background: yellow; border: solid 1px black; padding: 5px 8px; cursor: pointer;}
 
 .panel { background: #ccc; padding: 10px; }
+
+div { outline: dashed 1px #cdcdcd; }
