@@ -1,31 +1,41 @@
 // Define an App
-var app = angular.module('app', []);
-
-app.config(function($routeProvider) {
-	$routeProvider
-		.when('/', 
-		{
-			templateURL: 'app.html', 
-			controller: 'AppCtrl'
-		})
-		.when('/pizza/:crust/:toppings', {
-			redirectTo: function(routeParams, path, search) {
-				console.log(routeParams);
-				console.log(path);
-				console.log(search);
-				return '/' + routeParams.crust;
-			}
-		})
-		.when('/deep', {
-			template: 'Deep Dish'
-		})
-		.otherwise({
-			redirectTo: '/'
-		});
-});
+var app = angular.module('phoneApp', []);
 
 app.controller('AppCtrl', function($scope) {
-	$scope.model = {
-		message: 'This is my app!!!'
+	$scope.leaveVoicemail = function(number, messagez) {
+		alert("Number: " + number + " said: " + messagez);
 	};
 });
+
+app.directive('phone', function() {
+	return {
+		restrict: 'E',
+		scope: {
+			number: '@',	// shorthand for reading in an attribute. In this case, 'number' is readin in phone numbers on each input
+			network: '=',	// set up two-way binding. Directive is connected to the controller
+			makeCall: '&'	// can make a call on the controller scope.
+		},
+		template: '<div class="panel"> Number: {{number}} Network: <select ng-model="network" ng-options="net for net in networks"></select>' +
+			'<input type="text" ng-model="value">' +
+			'<div class="button" ng-click="makeCall({number:number, message:value})"> Call home!</div></div>', //{{paramFromHTML:valSentToControllerFunction}}
+
+		link: function(scope) {
+			scope.networks = ['Verizon', 'AT&T', 'Sprint'];
+			scope.network = scope.networks[0];
+		}
+	};
+});
+
+app.controller('listCtrl', function($scope) {
+  $scope.activities = [
+    { "name": "Wake up" },
+    { "name": "Brush teeth" },
+    { "name": "Shower" },
+    { "name": "Have breakfast" },
+    { "name": "Go to work" },
+    { "name": "Write a Nettuts article" },
+    { "name": "Go to the gym" },
+    { "name": "Meet friends" },
+    { "name": "Go to bed" }
+  ];
+ });
