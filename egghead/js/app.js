@@ -1,27 +1,25 @@
 // Define an App
 var app = angular.module('app', []);
 
-app.directive('zippy', function() {
-  return {
-    restrict: 'E',
-    transclude: true,
-    scope: {
-      attrfoo: '@',
-      attrbar: '@'
-    },
-    templateUrl: 'templates/zippy_template.html',
+app.controller('AppCtrl', function($scope, $q) {
 
-    link: function(scope) {
-      scope.isContentVisible = false;
+  var defer = $q.defer();
 
-      scope.toggleContent = function() {
-        scope.isContentVisible = !scope.isContentVisible;
-        console.log('toggleContent Fired');
-      };
+  defer.promise
+    .then(function(weapon) {
+      alert('You can have my ' + weapon);
 
-      scope.myFunc = function() {
-        console.log('myfunct Fired');
-      };
-    }
-  };
+      return 'bow';
+    })
+    .then(function(weapon) {
+      alert('And my ' + weapon);
+
+      return 'axe';
+    })
+    .then(function(weapon) {
+      alert('As well as my ' + weapon);
+    })
+
+  defer.resolve('sword');
+
 });

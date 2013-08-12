@@ -11,24 +11,10 @@
   <h1>Angular</h1>
 
   <div ng-app="app">
-
-    <input type="text" ng-model="model.prop1"> <br/>
-    <input type="text" ng-model="model.prop2"> <br/>
-    <input type="text" ng-model="model.prop3">
-
-    <zippy attrfoo="{{model.prop1}}" attrbar="{{model.prop2}}">     <!-- grabs data from chrisProp -->
-      <!-- NOTE: content that is transcluded has access to parent scope.
-           This is how model.content is available to the view
-      -->
-      <p>Third input is : "{{model.prop3}}". First input is "{{model.prop1}}".</p>
-    </zippy>
-
+    <div ng-controller="AppCtrl"></div>
   </div>
-
 
   <script src="js/angular.js"></script>
   <script src="js/app.js"></script>
-
-
 </body>
 </html>
