@@ -1,71 +1,35 @@
 // Define an App
-var app = angular.module('superApp', []);
+var app = angular.module('app', []);
 
-app.factory('Data', function($rootScope) {
-  var sharedAbilities = [{url:''}, {url:''}, {url:''}, {url:''}];
+app.directive('dumbPassword', function() {
+  var validElement = angular.element('<div>{{model.input}}</div>');
 
-  return sharedAbilities;
-});
+  // Could be expanded for validations
+  var link = function(scope, elem) {
+    scope.$watch('model.input', function(value) {
+      if(value === 'secretword') {
+        validElement.toggleClass('button');
+        elem.append(validElement);
+      }
+      else {
+        validElement.removeClass('button');
+        validElement.remove();
+      }
+    });
+  };
 
-app.directive('interstitial', function(Data) {
   return {
     restrict: 'E',
-    transclude: true,
+    replace: true,
+    template: '<div> \n <input type=\"text\" ng-model=\"model.input\"> \n  </div>',
 
-    controller: function($scope) {
-      $scope.abilities = Data;
-
-      this.updateImage = function(fileReaderUrl, index) {
-        console.log('interstitial: this.addFlight:');
-        $scope.abilities[index].url = fileReaderUrl;
-
-        console.log('current abilities now are :');
-        console.log($scope.abilities);
-      }
-
-      this.removeImage = function(index) {
-        console.log('interstitial: removeImage:');
-        $scope.abilities[index].url = '';
-
-        console.log('current abilities now are :');
-        console.log($scope.abilities);
-      }
-
-    },
-    template: '<span> hello folks </span>',
-
-    link: function(scope, element) {
-      element.addClass('button');
-      element.bind('mouseenter', function() {
-        console.log(scope.abilities);
-      })
+    compile: function(tElem) {
+      // Appends angular element onto template upon compilation process.
+      // No need to traverse DOM. Reference to element is stored
+      // tElem.append(validElement);
+      return link;
     }
-  }
+  };
 });
 
-app.directive('updateImage', function() {
-  return {
-    require: 'interstitial',
-    link: function(scope, element, attrs, superheroCtrl) {
-      //update image
-      var fileReaderUrl = 'www.newurl.com';
-      console.log('updateImage: link function:');
-      superheroCtrl.updateImage(fileReaderUrl, attrs.imageIndex);
-    }
-  }
-});
 
-app.directive('removeImage', function() {
-  return {
-    require: 'interstitial',
-    link: function(scope, element, attrs, superheroCtrl) {
-      console.log('removeImage:');
-
-      element.bind('click', function() {
-        superheroCtrl.removeImage(attrs.imageIndex);
-        console.log('removeImage: link function:');
-        console.log(scope.abilities);
-      })
-    }
-  }
-});
